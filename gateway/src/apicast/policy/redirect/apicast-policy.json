@@ -1,0 +1,38 @@
+{
+  "$schema": "http://apicast.io/policy-v1/schema#manifest#" ,
+  "name": "URL redirect with captures",
+  "summary": "Redirects requests to another upstream and rewrites the URL using captured arguments",
+  "description":
+    ["Captures arguments in a URL and rewrites/redirects the URL using those arguments. ",
+     "For example, we can specify a matching rule with arguments like ",
+     "'/{orderId}/{accountId}' and a template that specifies how to rewrite ",
+     "the URL using those arguments, for example: ",
+     "'http://sales.service.com/sales/v2/{orderId}?account={accountId}'. In that case, the request ",
+     "'/123/456' will be transformed into 'http://sales.service.com/sales/v2/123?account=456'"],
+  "version": "builtin",
+  "configuration": {
+    "type": "object",
+    "properties": {
+      "rules": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "http_method": {
+              "type": "string",
+              "description": "HTTP method to be matched"
+            }, 
+            "match_rule": {
+              "type": "string",
+              "description": "Rule to be matched"
+            },
+            "template": {
+              "type": "string",
+              "description": "Template in which the matched args are replaced"
+            }
+          }
+        }
+      }
+    }
+  }
+}
